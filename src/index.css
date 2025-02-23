@@ -1,0 +1,38 @@
+.app {
+  text-align: center;
+  padding: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: pulse 1.5s infinite; 
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out; /* Анимация появления текста */
+}
+
+p.visible {
+  opacity: 1;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Увеличиваем на 10% */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
