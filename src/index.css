@@ -10,7 +10,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  animation: pulse 1.5s infinite; 
+  animation: jump 1s infinite;; 
 }
 
 button:hover {
@@ -18,13 +18,18 @@ button:hover {
 }
 
 p {
+  position: relative;
+  left: -50px;
   opacity: 0;
-  transition: opacity 0.7s ease-in-out; /* Анимация появления текста */
+  transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Анимация появления текста */
+ 
 }
 
 p.visible {
+  left: 0px;
   opacity: 1;
 }
+
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -35,4 +40,10 @@ p.visible {
   100% {
     transform: scale(1);
   }
+}
+
+@keyframes jump {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
 }
