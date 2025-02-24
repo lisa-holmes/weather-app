@@ -1,6 +1,7 @@
 .app {
   text-align: center;
   padding: 20px;
+  min-height: 1000px; /* Чтобы можно было прокрутить */
 }
 
 button {
@@ -10,7 +11,10 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  animation: jump 1s infinite;; 
+  position: fixed; /* Кнопка прилипла к экрану */
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%); /* Центрируем */
 }
 
 button:hover {
@@ -18,32 +22,15 @@ button:hover {
 }
 
 p {
-  position: relative;
-  left: -50px;
+  position: absolute; /* Текст относительно .app */
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0;
-  transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out; /* Анимация появления текста */
- 
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 p.visible {
-  left: 0px;
   opacity: 1;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1); /* Увеличиваем на 10% */
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes jump {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
+  transform: translateX(-50%) rotate(360deg); /* Поворот при появлении */
 }
