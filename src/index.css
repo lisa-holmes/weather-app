@@ -1,7 +1,7 @@
 .app {
   text-align: center;
   padding: 20px;
-  min-height: 1000px; /* Чтобы можно было прокрутить */
+  min-height: 1000px; /* Оставляем для скролла */
 }
 
 button {
@@ -11,10 +11,11 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  position: fixed; /* Кнопка прилипла к экрану */
+  position: fixed;
   top: 10px;
   left: 50%;
-  transform: translateX(-50%); /* Центрируем */
+  transform: translateX(-50%);
+  animation: burst 2s infinite; /* Волновой эффект */
 }
 
 button:hover {
@@ -22,15 +23,46 @@ button:hover {
 }
 
 p {
-  position: absolute; /* Текст относительно .app */
+  position: absolute;
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: all 0.8s ease-in-out; /* Плавный переход для всех свойств */
 }
 
 p.visible {
   opacity: 1;
-  transform: translateX(-50%) rotate(360deg); /* Поворот при появлении */
+  transform: translateX(-50%) translateY(20px); /* Сдвиг вниз */
+  animation: glow 1.5s infinite; /* Мерцание */
+}
+
+@keyframes burst {
+  0% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2);
+    box-shadow: 0 0 30px 15px rgba(255, 0, 0, 0);
+    background-color: #ff5555; /* Красный */
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    background-color: #4CAF50; /* Обратно зелёный */
+  }
+}
+
+/* Анимация для текста: мерцание */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px rgba(235, 79, 52, 0.5); /* Лёгкое свечение */
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(235, 79, 52, 1); /* Ярче */
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(235, 79, 52, 0.5); /* Снова слабее */
+  }
 }
