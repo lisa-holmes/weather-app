@@ -1,9 +1,11 @@
 .app {
   text-align: center;
   padding: 20px;
-  min-height: 1000px; /* Оставляем для скролла */
+  min-height: 1000px;
+  background: #f0f0f0; /* Светлый фон */
 }
 
+/* Контейнер для кнопки и круга */
 button {
   padding: 10px 20px;
   background-color: #4CAF50;
@@ -11,11 +13,30 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  position: fixed;
+  position: fixed; /* Только fixed */
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  animation: burst 2s infinite; /* Волновой эффект */
+  animation: wave 2s infinite;
+  overflow: hidden;
+}
+/* Пульсирующий круг при наведении */
+button::after {
+  content: ''; /* Пустой псевдоэлемент */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3); /* Полупрозрачный белый */
+  border-radius: 50%; /* Круг */
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease; /* Плавное расширение */
+}
+
+button:hover::after {
+  width: 100px; /* Круг растёт */
+  height: 100px;
 }
 
 button:hover {
@@ -28,41 +49,44 @@ p {
   left: 50%;
   transform: translateX(-50%);
   opacity: 0;
-  transition: all 0.8s ease-in-out; /* Плавный переход для всех свойств */
+  transition: all 0.8s ease-in-out;
+  color: #333;
 }
 
 p.visible {
   opacity: 1;
-  transform: translateX(-50%) translateY(20px); /* Сдвиг вниз */
-  animation: glow 1.5s infinite; /* Мерцание */
+  transform: translateX(-50%) translateY(20px);
+  animation: flash 0.5s ease-in-out; /* Вспышка один раз */
 }
 
-@keyframes burst {
+/* Волна для кнопки */
+@keyframes wave {
   0% {
     transform: translateX(-50%) scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
   }
   50% {
-    transform: translateX(-50%) scale(1.2);
-    box-shadow: 0 0 30px 15px rgba(255, 0, 0, 0);
-    background-color: #ff5555; /* Красный */
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 0 20px 10px rgba(76, 175, 80, 0);
   }
   100% {
     transform: translateX(-50%) scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
-    background-color: #4CAF50; /* Обратно зелёный */
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
   }
 }
 
-/* Анимация для текста: мерцание */
-@keyframes glow {
+/* Вспышка для текста */
+@keyframes flash {
   0% {
-    text-shadow: 0 0 5px rgba(235, 79, 52, 0.5); /* Лёгкое свечение */
+    text-shadow: 0 0 0 rgba(255, 215, 0, 0); /* Нет света */
+    transform: translateX(-50%) translateY(20px) scale(1);
   }
   50% {
-    text-shadow: 0 0 15px rgba(235, 79, 52, 1); /* Ярче */
+    text-shadow: 0 0 30px rgba(255, 215, 0, 1); /* Яркая золотая вспышка */
+    transform: translateX(-50%) translateY(20px) scale(1.1); /* Чуть больше */
   }
   100% {
-    text-shadow: 0 0 5px rgba(235, 79, 52, 0.5); /* Снова слабее */
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); /* Остаточное свечение */
+    transform: translateX(-50%) translateY(20px) scale(1);
   }
 }
